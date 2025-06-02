@@ -1,7 +1,27 @@
 <script setup lang="ts">
-import TaskCard from "./TaskCard.vue";
+import TaskCard from "@/entities/task/ui/TaskCard.vue";
 
-import * as Model from "../model";
+import * as Model from "@/entities/task/model";
+import { ref } from "vue";
+import getTasksByOwnerId from "@/entities/task/api";
+
+const tasksFromApi = ref<
+  {
+    id: number;
+    ownerId: number;
+    name: string;
+    description: string;
+    completedAt: string | null;
+    createdAt: string;
+  }[]
+>([]);
+
+async function fetchAll() {
+  tasks.value = await getTasksByOwnerId(2);
+  console.log(tasks.value);
+}
+
+fetchAll();
 
 const { tasks } = Model.Store.useSharedTasks();
 </script>

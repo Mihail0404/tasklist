@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TaskDelete from "../../../features/delete-task/TaskDelete.vue";
+import TaskDelete from "@/features/delete-task/TaskDelete.vue";
 
 defineProps<{
   title: string;

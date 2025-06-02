@@ -1,4 +1,4 @@
-import * as Model from "./model";
-import * as UI from "./ui";
+import * as Model from "@/entities/task/model";
+import * as UI from "@/entities/task/ui";
 
 export { Model, UI };

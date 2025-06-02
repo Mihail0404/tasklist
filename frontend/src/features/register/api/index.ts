@@ -1,5 +1,5 @@
 import createClient from "openapi-fetch";
-import type { paths } from "../../../../rest-schema";
+import type { paths } from "@/../rest-schema";
 
 const client = createClient<paths>({
   baseUrl: "http://tasklist.localhost.com/",
@@ -17,6 +17,6 @@ export default async function Reg(
       password: password,
     },
   });
-  let tasks: Types.ApiTaskType[] = await data;
-  return tasks;
+  let answer = await data;
+  return answer;
 }

@@ -1,5 +1,3 @@
-import * as UI from './ui';
+import * as UI from "@/features/auth/ui";
 
-export {
-    UI
-}
+export { UI };

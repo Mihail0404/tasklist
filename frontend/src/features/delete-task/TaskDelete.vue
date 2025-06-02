@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import * as taskEntity from "../../entities/task";
+import * as taskEntity from "@/entities/task";
 
 const sharedTasks = taskEntity.Model.Store.useSharedTasks().tasks;
 
@@ -9,7 +9,7 @@ defineProps<{
   date: Date;
 }>();
 
-function deleteTask(obj: taskEntity.Model.Types.TaskType) {
+function deleteTask(obj: taskEntity.Model.Types.Task) {
   // здесь апи удаления задачи
   let i = 0;
   for (const task of sharedTasks.value) {

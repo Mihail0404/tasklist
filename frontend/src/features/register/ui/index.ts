@@ -1,3 +1,3 @@
-import Register from "./Register.vue";
+import Register from "@/features/register/ui/Register.vue";
 
 export { Register };

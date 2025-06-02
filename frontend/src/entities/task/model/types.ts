@@ -1,10 +1,4 @@
-export type TaskType = {
-  name: string;
-  description: string;
-  date: Date;
-};
-
-export type ApiTaskType = {
+export type Task = {
   id: number;
   name: string;
   description: string;
