@@ -6,5 +6,5 @@ class Task(pydantic.BaseModel):
     owner_id: int # = pydantic.Field(serialization_alias='ownerId')
     name: str
     description: str
-    complited_at: str# = pydantic.Field(serialization_alias='complitedAt')
+    completed_at: str | None# = pydantic.Field(serialization_alias='completedAt')
     created_at: str #= pydantic.Field(serialization_alias='createdAt')

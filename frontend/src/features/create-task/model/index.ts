@@ -7,7 +7,7 @@ export default async function addTask(taskToCreate: {
   ownerId: number;
   name: string;
   description: string;
-  completedAt: string;
+  completedAt: string | null;
   createdAt: string;
 }) {
   const task = await api.createTask(taskToCreate);

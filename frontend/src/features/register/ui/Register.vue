@@ -2,6 +2,7 @@
 import { useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/yup";
 import * as yup from "yup";
+import * as register from "@/features/register/model";
 
 const schema = toTypedSchema(
   yup.object({
@@ -19,8 +20,8 @@ const [name, nameAttrs] = defineField("name");
 const [login, loginAttrs] = defineField("login");
 const [password, passwordAttrs] = defineField("password");
 
-function addUser(obj) {
-  // здесь апи регистрации
+function addUser(user: { name: string; login: string; password: string }) {
+  register.ApiAddUser(user);
 }
 const onSubmit = handleSubmit((values) => {
   addUser(values);
@@ -37,7 +38,7 @@ const onSubmit = handleSubmit((values) => {
       <input v-model="login" type="text" v-bind="loginAttrs" />
       <div class="errors">{{ errors.login }}</div>
       <label for="date">Пароль</label>
-      <input v-model="password" type="text" v-bind="passwordAttrs" />
+      <input v-model="password" type="password" v-bind="passwordAttrs" />
       <div class="errors">{{ errors.password }}</div>
       <button id="create-button" type="submit">Зарегистрироваться</button>
     </form>

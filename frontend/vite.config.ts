@@ -7,6 +7,10 @@ export default defineConfig({
   plugins: [vue()],
   server: {
     allowedHosts: ["tasklist.localhost.com"],
+    hmr: {
+      port: 5173,
+    },
+    strictPort: true,
   },
   resolve: {
     alias: {

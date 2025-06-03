@@ -7,3 +7,16 @@
   </nav>
   <RouterView />
 </template>
+<style>
+.header {
+  color: #fff;
+  padding: 0 10px;
+  text-decoration: none;
+}
+
+nav {
+  background-color: #3b3b3b;
+  padding: 20px;
+  border-radius: 10px;
+}
+</style>

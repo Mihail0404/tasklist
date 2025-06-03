@@ -1,5 +1,7 @@
-export const ErrorMiddleware = {
-  async onResponse({ response: Response }) {
+import type { Middleware } from "openapi-fetch";
+
+export const ErrorMiddleware: Middleware = {
+  async onResponse({ response }) {
     if (!response.ok) {
       const error = await response.json();
 

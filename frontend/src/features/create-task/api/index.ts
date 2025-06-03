@@ -1,12 +1,4 @@
-import createClient from "openapi-fetch";
-import type { paths } from "@/../rest-schema.d.ts";
-import * as taskEntity from "@/entities/task";
-
-const client = createClient<paths>({
-  baseUrl: "http://tasklist.localhost.com/",
-});
-
-const sharedTasks = taskEntity.Model.Store.useSharedTasks().tasks;
+import { client } from "@/shared/api";
 
 function normalizeTask(taskToNormalize: {
   id: number;
@@ -29,7 +21,7 @@ export async function createTask(task: {
   ownerId: number;
   name: string;
   description: string;
-  completedAt: string;
+  completedAt: string | null;
   createdAt: string;
 }) {
   const response = await client.POST("/api/tasks", {
@@ -37,7 +29,7 @@ export async function createTask(task: {
       ownerId: task.ownerId,
       name: task.name,
       description: task.description,
-      complitedAt: task.completedAt,
+      completedAt: task.completedAt ? task.completedAt : null,
       createdAt: task.createdAt,
     },
   });

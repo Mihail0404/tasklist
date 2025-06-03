@@ -131,8 +131,8 @@ export interface components {
             name: string;
             /** Description */
             description: string;
-            /** Complitedat */
-            complitedAt: string;
+            /** Completedat */
+            completedAt: string | null;
             /** Createdat */
             createdAt: string;
         };

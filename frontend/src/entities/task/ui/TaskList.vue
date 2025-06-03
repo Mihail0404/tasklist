@@ -16,14 +16,14 @@ const tasksFromApi = ref<
   }[]
 >([]);
 
+const { tasks } = Model.Store.useSharedTasks();
+
 async function fetchAll() {
   tasks.value = await getTasksByOwnerId(2);
   console.log(tasks.value);
 }
 
 fetchAll();
-
-const { tasks } = Model.Store.useSharedTasks();
 </script>
 <template>
   <div class="task-cards">
@@ -36,3 +36,14 @@ const { tasks } = Model.Store.useSharedTasks();
     </div>
   </div>
 </template>
+<style>
+.task {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 6px;
+  background-color: #c7c7c7;
+  max-width: 350px;
+  height: auto;
+}
+</style>

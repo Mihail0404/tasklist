@@ -1,10 +1,5 @@
-import createClient from "openapi-fetch";
-import type { paths } from "@/../rest-schema";
+import { client } from "@/shared/api";
 import * as MiddleWare from "@/shared/api/middleware";
-
-const client = createClient<paths>({
-  baseUrl: "http://tasklist.localhost.com/",
-});
 
 export type ApiTaskType = {
   id: number;
@@ -17,11 +12,40 @@ export type ApiTaskType = {
 
 client.use(MiddleWare.ErrorMiddleware);
 
+function normalizeTask(
+  tasksToNormalize: {
+    id: number;
+    ownerId: number;
+    name: string;
+    description: string;
+    completedAt: string | null;
+    createdAt: string;
+  }[]
+) {
+  const normalizedTasks: {
+    id: number;
+    ownerId: number;
+    name: string;
+    description: string;
+    completedAt: Date | null;
+    createdAt: Date;
+  }[] = [];
+  for (let el of tasksToNormalize) {
+    const task = {
+      ...el,
+      completedAt: el.completedAt ? new Date(el.completedAt) : null,
+      createdAt: new Date(el.createdAt),
+    };
+    normalizedTasks.push(task);
+  }
+  return normalizedTasks;
+}
+
 export default async function getTasksByOwnerId(ownerId: number) {
   const response = await client.GET("/api/tasks", {
     params: {
       query: { ownerId: ownerId },
     },
   });
-  return response.data!;
+  return normalizeTask(response.data!);
 }
