@@ -12,14 +12,12 @@ def add_task(owner_id, name, description, completed_at, created_at):
         name = name,
         description = description,
         completed_at = completed_at,
-        created_at= created_at,
+        created_at = created_at,
     )
     session.add(task)
     session.commit()
 
     return task.dto()
-    # except Exception as error:
-    #     return {"error": error}
     
 
 def delete_task(id):
@@ -30,8 +28,6 @@ def delete_task(id):
     session.delete(task)
     session.commit()
     return task
-    # except:
-    #     return {"errors": True}
     
 
 def get_tasks_by_owner_id(owner_id):

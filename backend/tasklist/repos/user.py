@@ -17,7 +17,6 @@ def add_user(name, login, pwd):
     session.commit()
 
     return user
-    # except: return {"error": True}
 
 
 def check_password(login, pwd):

@@ -2,6 +2,7 @@
 import TaskDelete from "@/features/delete-task/TaskDelete.vue";
 
 defineProps<{
+  id: number;
   title: string;
   description: string;
   date: Date;
@@ -9,16 +10,17 @@ defineProps<{
 </script>
 <template>
   <div class="task-card">
-    <p class="task-card__title">
+    <div class="task-card__title">
       {{ title }}
-    </p>
-    <p class="task-card__description">{{ description }}</p>
-    <p>
+    </div>
+    <div class="task-card__description">{{ description }}</div>
+    <div class="task-card__create-date">
+      Дата создания:
       {{
         date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
       }}
-    </p>
-    <TaskDelete :name="title" :description="description" :date="date" />
+    </div>
+    <TaskDelete :id="id" />
   </div>
 </template>
 <style>

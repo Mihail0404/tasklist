@@ -41,7 +41,7 @@ function normalizeTask(
   return normalizedTasks;
 }
 
-export default async function getTasksByOwnerId(ownerId: number) {
+export async function getTasksByOwnerId(ownerId: number) {
   const response = await client.GET("/api/tasks", {
     params: {
       query: { ownerId: ownerId },
