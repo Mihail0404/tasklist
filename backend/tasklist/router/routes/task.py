@@ -10,7 +10,7 @@ router = fastapi.APIRouter()
 
 @router.post("/api/tasks", response_model= responses.Task)
 def create_task(task: requests.Task):
-    result = add_task.add_task(task.owner_id, task.name, task.description, task.completed_at, task.created_at)
+    result = add_task.add_task(task.owner_id, task.name, task.description, task.completed_at)
     return result
 
 @router.get("/api/tasks" ,response_model= list[responses.Task])

@@ -1,18 +1,19 @@
 from tasklist.db import entities
 from tasklist.db.database import get_session
 from tasklist.use_cases.dto import task
-from sqlalchemy import select
+import sqlalchemy as sa
 from tasklist.db.entities.task import Task
+from datetime import datetime
 
 
-def add_task(owner_id, name, description, completed_at, created_at):
+def add_task(owner_id, name, description, completed_at):
     session = get_session()
     task = entities.Task(
         owner_id = owner_id,
         name = name,
         description = description,
         completed_at = completed_at,
-        created_at = created_at,
+        created_at = datetime.now()
     )
     session.add(task)
     session.commit()
@@ -23,7 +24,7 @@ def add_task(owner_id, name, description, completed_at, created_at):
 def delete_task(id):
     session = get_session()
 
-    current_task = select(Task).where(Task.id ==  id)
+    current_task = sa.select(Task).where(Task.id ==  id)
     task = session.scalars(current_task).one()
     session.delete(task)
     session.commit()
@@ -32,7 +33,7 @@ def delete_task(id):
 
 def get_tasks_by_owner_id(owner_id):
     session = get_session()
-    result = select(Task).where(Task.owner_id == owner_id)
+    result = sa.select(Task).where(Task.owner_id == owner_id)
     tasks_from_db = list(session.scalars(result))
     tasks = []
     for task_from_db in tasks_from_db:

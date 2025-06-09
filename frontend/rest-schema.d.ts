@@ -99,8 +99,25 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** Check User Password */
-        post: operations["check_user_password_api_sign_in_post"];
+        /** Get User By Login And Password */
+        post: operations["get_user_by_login_and_password_api_sign_in_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/my-profile": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Userdata By Cookie */
+        get: operations["get_userdata_by_cookie_api_my_profile_get"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -133,8 +150,6 @@ export interface components {
             description: string;
             /** Completedat */
             completedAt: string | null;
-            /** Createdat */
-            createdAt: string;
         };
         /** Task */
         "Task-Output": {
@@ -152,13 +167,22 @@ export interface components {
             createdAt: string;
         };
         /** User */
-        User: {
+        "User-Input": {
             /** Name */
             name: string;
             /** Login */
             login: string;
             /** Password */
             password: string;
+        };
+        /** User */
+        "User-Output": {
+            /** Id */
+            id: number;
+            /** Name */
+            name: string;
+            /** Login */
+            login: string;
         };
         /** ValidationError */
         ValidationError: {
@@ -336,7 +360,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["User"];
+                "application/json": components["schemas"]["User-Input"];
             };
         };
         responses: {
@@ -360,7 +384,7 @@ export interface operations {
             };
         };
     };
-    check_user_password_api_sign_in_post: {
+    get_user_by_login_and_password_api_sign_in_post: {
         parameters: {
             query?: never;
             header?: never;
@@ -379,7 +403,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": unknown;
+                    "application/json": components["schemas"]["User-Output"];
                 };
             };
             /** @description Validation Error */
@@ -389,6 +413,26 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_userdata_by_cookie_api_my_profile_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["User-Output"];
                 };
             };
         };

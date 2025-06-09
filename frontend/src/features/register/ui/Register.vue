@@ -25,6 +25,7 @@ function addUser(user: { name: string; login: string; password: string }) {
 }
 const onSubmit = handleSubmit((values) => {
   addUser(values);
+  window.location.href = "/auth";
 });
 </script>
 <template>

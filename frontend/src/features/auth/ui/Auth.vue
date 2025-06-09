@@ -2,6 +2,7 @@
 import { useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/yup";
 import * as yup from "yup";
+import * as auth from "@/features/auth/model";
 
 const schema = toTypedSchema(
   yup.object({
@@ -17,11 +18,12 @@ const { errors, defineField, handleSubmit } = useForm({
 const [login, loginAttrs] = defineField("login");
 const [password, passwordAttrs] = defineField("password");
 
-function userLogin(obj) {
-  // здесь апи атворизации
+function userSignIn(userdata: { login: string; password: string }) {
+  auth.ApiAuth(userdata);
 }
 const onSubmit = handleSubmit((values) => {
-  userLogin(values);
+  userSignIn(values);
+  window.location.href = "/tasks";
 });
 </script>
 <template>
@@ -32,7 +34,7 @@ const onSubmit = handleSubmit((values) => {
       <input v-model="login" type="text" v-bind="loginAttrs" />
       <div class="errors">{{ errors.login }}</div>
       <label for="date">Пароль</label>
-      <input v-model="password" type="text" v-bind="passwordAttrs" />
+      <input v-model="password" type="password" v-bind="passwordAttrs" />
       <div class="errors">{{ errors.password }}</div>
       <button id="create-button" type="submit">Войти</button>
     </form>

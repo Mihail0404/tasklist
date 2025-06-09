@@ -1,31 +1,29 @@
-from sqlalchemy import select
+import sqlalchemy as sa
 from tasklist.helper import hash
 from tasklist.db.entities.user import User
 from tasklist.db.database import get_session
 
 def add_user(name, login, pwd):
     # try:
-    hash_pwd = hash.get_hash(pwd)
+    hash_password = hash.get_hash(pwd)
 
     session = get_session()
     user = User(
         name = name,
         login = login,
-        password = hash_pwd,
+        password = hash_password,
     )
     session.add(user)
     session.commit()
 
-    return user
+    return user.dto()
 
 
-def check_password(login, pwd):
-    hash_pwd = hash.get_hash(pwd)
-
+def get_user_by_login_and_password(login: str, password: str):
     session = get_session()
+    return session.scalars(sa.select(User).filter_by(login=login, password=password)).one_or_none()
 
-    result = select(User).where(User.login == login).where(User.password == hash_pwd)
-    if(len(list(session.scalars(result)))):
-        return {"is_password_correct": True}
-    else:
-        return {"is_password_correct": False}
+def get_user_by_login(login: str):
+    session = get_session()
+    user = session.scalars(sa.select(User).filter_by(login=login)).one_or_none()
+    return user

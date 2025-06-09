@@ -7,4 +7,3 @@ class Task(pydantic.BaseModel):
     name: str
     description: str
     completed_at: str | None# = pydantic.Field(serialization_alias='completedAt')
-    created_at: str #= pydantic.Field(serialization_alias='createdAt')

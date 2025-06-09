@@ -1,15 +1,15 @@
-from sqlalchemy import  Integer, String
+import sqlalchemy as sa
 from sqlalchemy.orm import Mapped, mapped_column
 from tasklist.db.database import Base
 from tasklist.use_cases.dto import task
 class Task(Base):
     __tablename__ = "tasks"
     id: Mapped[int] = mapped_column(primary_key=True)
-    owner_id: Mapped[int] = mapped_column(Integer)
-    name: Mapped[str] = mapped_column(String)
-    description: Mapped[str] = mapped_column(String)
-    completed_at: Mapped[str] = mapped_column(String, nullable=True)
-    created_at: Mapped[str] = mapped_column(String)
+    owner_id: Mapped[int] = mapped_column(sa.Integer)
+    name: Mapped[str] = mapped_column(sa.String)
+    description: Mapped[str] = mapped_column(sa.String)
+    completed_at: Mapped[str] = mapped_column(sa.String, nullable=True)
+    created_at: Mapped[str] = mapped_column(sa.String)
     
     def dto(self) -> task.Task:
         return task.Task(

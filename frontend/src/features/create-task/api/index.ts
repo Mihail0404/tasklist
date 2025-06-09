@@ -1,4 +1,5 @@
 import { client } from "@/shared/api";
+import * as Api from "@/entities/task/api";
 
 function normalizeTask(taskToNormalize: {
   id: number;
@@ -18,19 +19,16 @@ function normalizeTask(taskToNormalize: {
 }
 
 export async function createTask(task: {
-  ownerId: number;
   name: string;
   description: string;
   completedAt: string | null;
-  createdAt: string;
 }) {
   const response = await client.POST("/api/tasks", {
     body: {
-      ownerId: task.ownerId,
+      ownerId: (await Api.getUserData()).id,
       name: task.name,
       description: task.description,
       completedAt: task.completedAt ? task.completedAt : null,
-      createdAt: task.createdAt,
     },
   });
 

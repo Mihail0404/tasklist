@@ -8,8 +8,6 @@ const schema = toTypedSchema(
   yup.object({
     name: yup.string().required(),
     description: yup.string().required(),
-    ownerId: yup.number().required(),
-    createdAt: yup.date().required(),
     completedAt: yup.date(),
   })
 );
@@ -20,8 +18,6 @@ const { errors, defineField, handleSubmit } = useForm({
 
 const [name, nameAttrs] = defineField("name");
 const [description, descriptionAttrs] = defineField("description");
-const [ownerId, owneridAttrs] = defineField("ownerId");
-const [createdAt, createdatAttrs] = defineField("createdAt");
 const [completedAt, completedatAttrs] = defineField("completedAt");
 
 const onSubmit = handleSubmit((values) => {
@@ -30,7 +26,6 @@ const onSubmit = handleSubmit((values) => {
     completedAt: values.completedAt
       ? values.completedAt.toLocaleDateString("en-US")
       : null,
-    createdAt: values.createdAt.toLocaleDateString("en-US"),
   });
 });
 </script>
@@ -44,12 +39,6 @@ const onSubmit = handleSubmit((values) => {
       <label for="description">Описание задачи</label>
       <input v-model="description" type="text" v-bind="descriptionAttrs" />
       <div class="errors">{{ errors.description }}</div>
-      <label for="owner_id">owner_id</label>
-      <input v-model="ownerId" type="text" v-bind="owneridAttrs" />
-      <div class="errors">{{ errors.ownerId }}</div>
-      <label for="date">Дата создания</label>
-      <input v-model="createdAt" type="date" v-bind="createdatAttrs" />
-      <div class="errors">{{ errors.createdAt }}</div>
       <label for="date">Дата выполнения</label>
       <input v-model="completedAt" type="date" v-bind="completedatAttrs" />
       <div class="errors">{{ errors.completedAt }}</div>

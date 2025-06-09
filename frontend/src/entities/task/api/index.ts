@@ -49,3 +49,10 @@ export async function getTasksByOwnerId(ownerId: number) {
   });
   return normalizeTask(response.data!);
 }
+
+export async function getUserData() {
+  const response = await client.GET("/api/my-profile", {
+    params: {},
+  });
+  return response.data!;
+}

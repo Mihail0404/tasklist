@@ -10,7 +10,8 @@ function useTasks() {
   }
 
   async function fetchAll() {
-    tasks.value = await Api.getTasksByOwnerId(2);
+    const userId = await Api.getUserData();
+    tasks.value = await Api.getTasksByOwnerId(userId.id);
     console.log(tasks.value);
   }
 
