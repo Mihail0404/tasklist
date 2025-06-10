@@ -10,5 +10,5 @@ def get_encoded_user(userid, login, name):
     return encoded_userdata
 
 def get_decoded_userdata_by_jwt(token):
-    decoded_login = jwt.decode(token, SECRET_KEY, ALGORITM)
-    return decoded_login
+    decoded_userdata = jwt.decode(token, SECRET_KEY, ALGORITM)
+    return decoded_userdata

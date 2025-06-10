@@ -30,4 +30,5 @@ def get_userdata_by_cookie(request: fastapi.Request):
 
     except:
         raise fastapi.HTTPException(status_code=fastapi.status.HTTP_401_UNAUTHORIZED, detail="Unauthorized")
+    
     return result

@@ -44,3 +44,15 @@ def get_tasks_by_owner_id(owner_id):
                             completed_at=task_from_db.completed_at,
                             created_at=task_from_db.created_at))
     return tasks
+
+def get_task_by_id(id):
+    session = get_session()
+    result = sa.select(Task).where(Task.id == id)
+    task_from_db = session.scalars(result).one_or_none()
+    result = task.Task(id=task_from_db.id,
+                        owner_id=task_from_db.owner_id,
+                        name=task_from_db.name,
+                        description=task_from_db.description,
+                        completed_at=task_from_db.completed_at,
+                        created_at=task_from_db.created_at)
+    return result
